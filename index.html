@@ -5,10 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>陈佳宝 | Chanson</title>
   <meta name="description" content="陈佳宝 - 产品经理 | AI 工具研究者。分享产品管理实践与 AI 工具应用。">
+  <meta property="og:title" content="陈佳宝 | Product &amp; AI">
+  <meta property="og:description" content="产品经理 | AI 工具研究者。分享产品管理实践与 AI 工具应用。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bestxiao.asia/">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <noscript>
+    <!-- 无 JS 兼底：滚动入场元素直显，内容完整可读（契约 §2.2 渐进增强） -->
+    <style>.fade-up { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
 </head>
 <body>
+
+  <a href="#hero" class="skip-link">跳到主内容</a>
 
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav" id="nav">
@@ -18,6 +30,9 @@
         <li><a href="#about" class="nav__link">关于</a></li>
         <li><a href="#projects" class="nav__link">项目</a></li>
         <li><a href="#articles" class="nav__link">文章</a></li>
+        <li><a href="#toolbox" class="nav__link">工具箱</a></li>
+        <li><a href="resume.html" class="nav__link">简历</a></li>
+        <li><a href="games.html" class="nav__link">🎮 游戏集</a></li>
         <li><a href="#contact" class="nav__link">联系</a></li>
       </ul>
       <button class="nav__toggle" aria-label="切换菜单">
@@ -29,12 +44,14 @@
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
     <div class="hero__bg"></div>
+    <div class="hero__glass" aria-hidden="true"></div>
+    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero__content">
       <div class="hero__main">
         <p class="hero__label reveal">陈佳宝 · CHEN JIABAO</p>
         <h1 class="hero__title reveal">
-          <span class="hero__title-line">测试从业者</span>
-          <span class="hero__title-line hero__title-line--accent">&amp; 用户思维</span>
+          <span class="hero__title-line">产品管理</span>
+          <span class="hero__title-line hero__title-line--accent">&amp; AI 工具</span>
           <span class="hero__title-line">研究者</span>
         </h1>
         <p class="hero__sub reveal">
@@ -46,19 +63,70 @@
           <a href="#about" class="btn btn--outline">了解更多</a>
         </div>
       </div>
-      <div class="hero__featured reveal">
-        <div class="featured-card">
-          <span class="featured-card__badge">🔥 热门推荐</span>
-          <h3 class="featured-card__title">AI 编码实践文档</h3>
-          <p class="featured-card__desc">系统化的 AI 辅助编程指南，涵盖提示词工程、代码生成、调试优化等核心技能。</p>
-          <a href="https://bestxiao.asia/aidoc/" target="_blank" rel="noopener" class="featured-card__link">
-            立即查看
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
+
+      <div class="hero__toolbox" id="toolbox">
+        <div class="toolbox-panel">
+          <div class="toolbox-panel__header">
+            <span class="toolbox-panel__label">TOOLS</span>
+            <h3 class="toolbox-panel__title">我的工具箱</h3>
+            <p class="toolbox-panel__desc">个人服务 &amp; 应用入口</p>
+          </div>
+          <div class="toolbox-panel__grid">
+            <a href="/webdav" target="_blank" rel="noopener" class="tool-card">
+              <div class="tool-card__icon tool-card__icon--webdav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                </svg>
+              </div>
+              <div class="tool-card__info">
+                <span class="tool-card__name">WebDAV</span>
+                <span class="tool-card__tag">文件同步</span>
+              </div>
+              <div class="tool-card__status tool-card__status--online"></div>
+            </a>
+
+            <a href="https://todo.bestxiao.asia" target="_blank" rel="noopener" class="tool-card">
+              <div class="tool-card__icon tool-card__icon--todo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                </svg>
+              </div>
+              <div class="tool-card__info">
+                <span class="tool-card__name">个人Todo</span>
+                <span class="tool-card__tag">待办清单</span>
+              </div>
+              <div class="tool-card__status tool-card__status--online"></div>
+            </a>
+
+            <a href="games.html" target="_blank" rel="noopener" class="tool-card">
+              <div class="tool-card__icon tool-card__icon--maze" style="background:linear-gradient(135deg,#FF8A65,#FF7043);color:#fff;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="3"/><path d="M8 2v4M16 2v4M2 8h4M2 16h4M18 8h4M18 16h4M8 22v-4M16 22v-4"/><circle cx="12" cy="12" r="2"/><circle cx="6" cy="6" r="1.5" fill="currentColor"/><circle cx="18" cy="18" r="1.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="tool-card__info">
+                <span class="tool-card__name">游戏集</span>
+                <span class="tool-card__tag">趣味小游戏</span>
+              </div>
+              <div class="tool-card__status tool-card__status--online"></div>
+            </a>
+
+            <a href="resume.html" rel="noopener" class="tool-card">
+              <div class="tool-card__icon tool-card__icon--notes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div class="tool-card__info">
+                <span class="tool-card__name">在线简历</span>
+                <span class="tool-card__tag">工作经历</span>
+              </div>
+              <div class="tool-card__status tool-card__status--online"></div>
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
     <div class="hero__scroll" aria-hidden="true">
       <span>滚动</span>
@@ -82,19 +150,55 @@
           我相信好的产品能改变世界，而 AI 是当下最强大的杠杆。
         </p>
         <p>
-          十余年产品管理经验，从需求挖掘到产品交付，经历了完整的产品生命周期。
-          近年深度研究 AI 工具在日常工作中的应用，探索如何用 AI 提升产品团队效率。
+          IT 领域深耕 15 年，具备外企及海外工作经验。从研发工程师到解决方案架构师，
+          再到高级产品经理，经历了技术与产品的完整链路。擅长云计算、运维工具链和
+          企业级产品规划，带过 20+ 人产研与交付团队。
         </p>
         <p>
-          这里是我的个人网站，分享我的思考、项目和实践经验。
-          希望能与志同道合的朋友交流碰撞。
+          近年深度研究 AI 工具在工作中的应用，探索如何用 AI 提升产品团队效率。
+          这里是我的个人网站，分享思考、项目和实践经验。
         </p>
-        <div class="about__tags">
-          <span class="tag">产品策略</span>
-          <span class="tag">AI 工具</span>
-          <span class="tag">需求管理</span>
-          <span class="tag">数据分析</span>
-          <span class="tag">团队协作</span>
+        <div class="about__tag-groups">
+          <div class="tag-group">
+            <span class="tag-group__label">专业技能</span>
+            <div class="tag-group__items">
+              <span class="tag">产品管理</span>
+              <span class="tag">解决方案架构</span>
+              <span class="tag">DevOps</span>
+              <span class="tag">云计算</span>
+              <span class="tag">AIOps</span>
+              <span class="tag">运维工具链</span>
+              <span class="tag">需求分析</span>
+              <span class="tag">数据可视化</span>
+            </div>
+          </div>
+          <div class="tag-group">
+            <span class="tag-group__label">行业经验</span>
+            <div class="tag-group__items">
+              <span class="tag">金融 IT</span>
+              <span class="tag">企业服务</span>
+              <span class="tag">跨国团队协作</span>
+              <span class="tag">ToB 交付</span>
+            </div>
+          </div>
+          <div class="tag-group">
+            <span class="tag-group__label">团队管理</span>
+            <div class="tag-group__items">
+              <span class="tag">敏捷开发</span>
+              <span class="tag">项目管理</span>
+              <span class="tag">20+ 人团队</span>
+              <span class="tag">产研交付</span>
+            </div>
+          </div>
+          <div class="tag-group">
+            <span class="tag-group__label">认证资质</span>
+            <div class="tag-group__items">
+              <span class="tag tag--cert">PMP</span>
+              <span class="tag tag--cert">CKA (K8S)</span>
+              <span class="tag tag--cert">阿里云 ACP</span>
+              <span class="tag tag--cert">ITIL V3</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -105,24 +209,32 @@
             <div class="timeline__dot"></div>
             <div class="timeline__content">
               <span class="timeline__year">2023 - 至今</span>
-              <h4>资深产品经理</h4>
-              <p>负责核心产品线，推动 AI 功能落地，团队管理</p>
+              <h4>高级产品经理</h4>
+              <p>IT 研发管理工具链平台规划与建设，推动产品整合与迭代</p>
             </div>
           </div>
           <div class="timeline__item">
             <div class="timeline__dot"></div>
             <div class="timeline__content">
-              <span class="timeline__year">2019 - 2023</span>
-              <h4>产品经理</h4>
-              <p>从 0 到 1 打造多款产品，负责需求分析与产品规划</p>
+              <span class="timeline__year">2020 - 2023</span>
+              <h4>解决方案架构师</h4>
+              <p>云计算运维产品方案设计，20+ 企业客户交付与咨询</p>
             </div>
           </div>
           <div class="timeline__item">
             <div class="timeline__dot"></div>
             <div class="timeline__content">
-              <span class="timeline__year">2015 - 2019</span>
-              <h4>初级产品经理</h4>
-              <p>需求文档、原型设计、跨部门协作，打好产品基本功</p>
+              <span class="timeline__year">2016 - 2020</span>
+              <h4>交付总监</h4>
+              <p>带领 20+ 人产研与交付团队，主导运维产品线</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content">
+              <span class="timeline__year">2008 - 2016</span>
+              <h4>技术工程师 → 产品经理</h4>
+              <p>外企研发、跨国项目交付，转型产品管理</p>
             </div>
           </div>
         </div>
@@ -154,6 +266,7 @@
           <div class="project-card__tech">
             <span>LLM</span><span>NLP</span><span>React</span><span>Python</span>
           </div>
+          <a class="project-card__link" href="articles/ai-requirement-research.html">查看实践 →</a>
         </div>
       </article>
 
@@ -172,6 +285,7 @@
           <div class="project-card__tech">
             <span>Vue</span><span>Node.js</span><span>MongoDB</span><span>AWS</span>
           </div>
+          <a class="project-card__link" href="articles/agile-ai-product.html">查看实践 →</a>
         </div>
       </article>
 
@@ -190,6 +304,7 @@
           <div class="project-card__tech">
             <span>D3.js</span><span>Python</span><span>SQL</span><span>WebSocket</span>
           </div>
+          <a class="project-card__link" href="articles/ai-toolbox-2026.html">查看实践 →</a>
         </div>
       </article>
 
@@ -208,27 +323,29 @@
           <div class="project-card__tech">
             <span>LangChain</span><span>GPT API</span><span>Next.js</span><span>Docker</span>
           </div>
+          <a class="project-card__link" href="articles/claude-agent-workflow.html">查看实践 →</a>
         </div>
       </article>
 
-      <article class="project-card fade-up" style="--card-bg: #1e1a2e;">
+      <article class="project-card fade-up" style="--card-bg: #16232b;">
         <div class="project-card__image">
           <div class="project-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/>
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 9l3 3-3 3"/><path d="M12 15h5"/>
             </svg>
           </div>
         </div>
         <div class="project-card__body">
-          <span class="project-card__tag">AI 编码</span>
-          <h3 class="project-card__title">AI 编码实践文档</h3>
-          <p class="project-card__desc">系统化的 AI 辅助编程实践指南，涵盖提示词工程、代码生成、调试优化等核心技能，助力开发者提效。</p>
-          <a href="https://bestxiao.asia/aidoc/" target="_blank" rel="noopener" class="project-card__link">查看文档 →</a>
+          <span class="project-card__tag">开源项目</span>
+          <h3 class="project-card__title">Pi Web Desktop (macOS)</h3>
+          <p class="project-card__desc">一个极小的原生 macOS 菜单栏启动器，无需终端即可探测、复用、启动、打开并停止本地 pi-web 实例。Swift + AppKit 编写，零第三方依赖，MIT 协议开源。</p>
           <div class="project-card__tech">
-            <span>Claude</span><span>GPT-4</span><span>提示工程</span><span>最佳实践</span>
+            <span>Swift</span><span>AppKit</span><span>macOS</span><span>零依赖</span>
           </div>
+          <a class="project-card__link" href="https://github.com/bestxia0/pi-web-desktop-macos" target="_blank" rel="noopener">查看源码 →</a>
         </div>
       </article>
+
     </div>
   </section>
 
@@ -250,7 +367,7 @@
         <p class="article-card__excerpt">
           传统需求调研效率低下，本文分享如何借助 AI 工具（LLM、语音转文字、智能分析）将调研周期缩短 50% 的实践经验。
         </p>
-        <a href="#" class="article-card__link">阅读更多 →</a>
+        <a href="articles/ai-requirement-research.html" class="article-card__link">阅读更多 →</a>
       </article>
 
       <article class="article-card fade-up">
@@ -262,7 +379,7 @@
         <p class="article-card__excerpt">
           整理了我日常工作中离不开的 AI 工具：从需求文档生成、用户画像分析到竞品追踪，每个环节都有对应的利器。
         </p>
-        <a href="#" class="article-card__link">阅读更多 →</a>
+        <a href="articles/ai-toolbox-2026.html" class="article-card__link">阅读更多 →</a>
       </article>
 
       <article class="article-card fade-up">
@@ -274,7 +391,7 @@
         <p class="article-card__excerpt">
           AI 正在改变产品管理的每一个环节。分享我在敏捷框架中融入 AI 工具的经验和教训。
         </p>
-        <a href="#" class="article-card__link">阅读更多 →</a>
+        <a href="articles/agile-ai-product.html" class="article-card__link">阅读更多 →</a>
       </article>
 
       <article class="article-card fade-up">
@@ -286,7 +403,7 @@
         <p class="article-card__excerpt">
           深度使用 Claude Agent 的经验分享，包括自定义 Skill 开发、MCP 服务器配置，以及如何构建个人 AI 助手。
         </p>
-        <a href="#" class="article-card__link">阅读更多 →</a>
+        <a href="articles/claude-agent-workflow.html" class="article-card__link">阅读更多 →</a>
       </article>
     </div>
   </section>
@@ -305,17 +422,17 @@
         欢迎通过以下方式联系我。
       </p>
       <div class="contact__links">
-        <a href="https://github.com/bestxiao0" target="_blank" rel="noopener" class="contact__link">
+        <a href="https://github.com/hollowwwww" target="_blank" rel="noopener" class="contact__link">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           GitHub
         </a>
-        <a href="mailto:bestxiao0@example.com" class="contact__link">
+        <a href="mailto:cjbthuglife@163.com" class="contact__link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Email
         </a>
-        <a href="https://bestxiao.asia" target="_blank" rel="noopener" class="contact__link">
+        <a href="https://www.winelife.top" target="_blank" rel="noopener" class="contact__link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          bestxiao.asia
+          个人门户
         </a>
       </div>
     </div>
@@ -325,13 +442,17 @@
   <footer class="footer">
     <div class="footer__inner">
       <p>&copy; 2026 陈佳宝 · Built with passion</p>
-      <p class="footer__tagline">用AI驱动技术 · 探索永不止步</p>
+      <p class="footer__tagline">产品 × AI · 探索永不止步</p>
       <p class="footer__beian">
         <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">蜀ICP备20003301号</a>
       </p>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion/motion-core.js" defer></script>
+  <script src="assets/js/motion/motion-prefs.js" defer></script>
+  <script src="assets/js/hero/hero-fluid.js" defer></script>
+  <script src="assets/js/hero/hero-pointer.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
